@@ -1,24 +1,26 @@
 import React, {useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {detailsProduct} from "../actions/products";
+import {Col, Image, Typography, Button} from "antd";
+const imgStyle ={width:'100%', objectFit:'cover', height:'150px'}
+const { Text, Title } = Typography;
 
 export  default (props)=>{
     const dispatch  = useDispatch();
     const {id} = useParams(); // Its comes by app router path need to use same object like (:id) for use id (:userid) user userid
 
+    const productDetails = useSelector((state)=>state.allProducts.product);
 
+    console.log(productDetails)
 
-    const productDetails = useSelector((state)=>state.allProducts.product)
-
-    console.log(id)
+    const {title, image, description, price } = productDetails;
 
     const getProductDetails = async ()=>{
         const resposne = await  axios.get(`https://fakestoreapi.com/products/${id}`).catch((error)=>{
             console.log('Error', error)
         });
-        console.log("hello", resposne.data)
         dispatch(detailsProduct(resposne.data))
     }
 
@@ -30,8 +32,18 @@ export  default (props)=>{
 
 
     return(
-        <div>
-            <h1>Product Details</h1>
-        </div>
+        <Col className="gutter-row" span={6}  >
+            {Object.keys(productDetails).length===0 ?(
+                    <div>Loading</div>
+            ):(
+                <div >
+                    <Image style={imgStyle} src={image}   />
+                    <Title level={4}>{title}</Title>
+                    <Title level={5}>${price}</Title>
+                </div>
+            )}
+
+
+        </Col>
     )
 }

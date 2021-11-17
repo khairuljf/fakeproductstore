@@ -7,7 +7,7 @@ const productReducerDefaultState  = {
 
 
 const productReducer = (state= productReducerDefaultState, action)=>{
-    console.log('Action',action)
+
     switch(action.type){
         case 'ADD_PRODUCTS':
             return {
