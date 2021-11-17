@@ -14,9 +14,6 @@ export default ()=>{
     const ProductList = products.map((product)=>{
     const {id, title, image, description, price } = product;
 
-    const handleDelete  = (e)=>{
-        console.log(e)
-    }
 
       return (
           <Col className="gutter-row" span={6}  key={id}>
@@ -26,7 +23,6 @@ export default ()=>{
                       <Title level={4}>{title}</Title>
                   </Link>
                   <Title level={5}>${price}</Title>
-                  <Button type="submit" danger accessKey={id} onClick={handleDelete} >Delete Product</Button>
               </div>
 
           </Col>

@@ -13,10 +13,9 @@ export const detailsProduct = (data) => ({
 })
 
 // Edit Expense 
-export const editExpense = (id, update)=>({
-   type:'EDIT_EXPENSE',
-   id,
-   update
+export const deleteProduct = (id)=>({
+   type:'DELETE_PRODUCT',
+   id
 })
 
 
